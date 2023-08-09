@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="mb-8">
+    <!-- Top section: Dashboard Summary -->
+    <div class=" p-6 mb-6" style="max-height: 400px; overflow: auto;">
+        <h1 class="text-3xl font-semibold mb-4">Summary</h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-5">
+          <div class="p-5 bg-white rounded shadow-sm">
+            <div class="text-base text-gray-400 ">Total Books</div>
+            <div class="flex items-center pt-1">
+              <div class="text-2xl font-bold text-gray-900 ">{{ total_books }}</div>
+              <span class="flex items-center px-2 py-0.5 mx-2 text-sm {% if total_books < 50 %}text-red-600{% else %}text-green-600{% endif %} bg-gray-100 rounded-full">
+                <svg class="w-4 h-4 {% if total_books < 50 %}transform rotate-180{% endif %}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span>
+                    Minimum (50)
+                </span>
+            </span>            
+            </div>
+          </div>
+          <div class="p-5 bg-white rounded shadow-sm">
+            <div class="text-base text-gray-400 ">Total Authors</div>
+            <div class="flex items-center pt-1">
+              <div class="text-2xl font-bold text-gray-900 ">{{ total_authors }}</div>
+              <span class="flex items-center px-2 py-0.5 mx-2 text-sm {% if total_books < 10 %}text-red-600{% else %}text-green-600{% endif %} bg-gray-100 rounded-full">
+                <svg class="w-4 h-4 {% if total_books < 10 %}transform rotate-180{% endif %}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span>
+                    Minimum (10)
+                </span>
+            </span>            
+            </div>
+          </div>
+          <div class="p-5 bg-white rounded shadow-sm">
+            <div class="text-base text-gray-400 ">Total Publications</div>
+            <div class="flex items-center pt-1">
+              <div class="text-2xl font-bold text-gray-900 ">{{ total_publications }}</div>
+              <span class="flex items-center px-2 py-0.5 mx-2 text-sm {% if total_books < 20 %}text-red-600{% else %}text-green-600{% endif %} bg-gray-100 rounded-full">
+                <svg class="w-4 h-4 {% if total_books < 20 %}transform rotate-180{% endif %}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span>
+                    Minimum (20)
+                </span>
+            </span>            
+            </div>
+          </div>
+          <div class="p-5 bg-white rounded shadow-sm">
+            <div class="text-base text-gray-400 ">Total Author</div>
+            <div class="flex items-center pt-1">
+              {% if top_author_name %}
+                <div class="text-2xl font-bold text-gray-900 ">{{ top_author_name }}</div>
+                {% else %}
+                <p>No authors found.</p>
+              {% endif %}
+              <span class="flex items-center px-2 py-0.5 mx-2 text-sm {% if top_author_prc < 50 %}text-red-600{% else %}text-green-600{% endif %} bg-gray-100 rounded-full">
+                <svg class="w-4 h-4 {% if top_author_prc < 50 %}transform rotate-180{% endif %}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span>
+                    {{top_author_prc}}% 
+                </span>
+            </span>            
+            </div>
+          </div>
+          <!-- Add more KPI cards as needed -->
+        </div>
+      </div>
+      
+
+  <!-- Bottom section: Recently Added Books -->
+  <h1 class="text-3xl font-semibold mb-4">Recently Added Books</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+    {% for book in books %}
+      <div class="bg-white shadow-md rounded-lg p-6 flex flex-col">
+        <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="w-full h-40 object-cover mb-4">
+        <h2 class="text-lg font-semibold">{{ book.title }}</h2>
+        <div class="flex-grow"></div> <!-- Spacer to push content to the top -->
+        <div class="flex flex-col items-start"> <!-- Container for bottom-aligned content -->
+          <p class="text-gray-600 mb-1">By {{ book.author }}</p>
+          <p class="text-gray-600 mb-1">{{ book.publication_date|date:"F Y" }}</p>
+          <p class="text-gray-600">ISBN - {{ book.isbn }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  
+</div>
+{% endblock %}

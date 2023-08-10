@@ -123,8 +123,32 @@ class CustomRegisterView(FormView):
     
 
 def update_book(request, book_id):
-    # Handle updating the book object
-    return JsonResponse({'success': True})
+    if request.method == 'POST':
+        # Retrieve form data
+        title = request.POST.get('book_title')
+        author = request.POST.get('author')
+        publication_date = request.POST.get('publication_date')
+        isbn = request.POST.get('isbn')
+
+        # Update the book with the retrieved data
+        try:
+            book = Book.objects.get(pk=book_id)
+            book.title = title
+            book.author = author
+            book.publication_date = publication_date
+            book.isbn = isbn
+            book.save()
+            updated_book = {
+                "title": book.title,
+                "author": book.author,
+                "publication_date": book.publication_date,
+                "isbn": book.isbn,
+            }
+            return JsonResponse({"success": True, "updated_book": updated_book})
+        except Book.DoesNotExist:
+            return JsonResponse({'success': False})
+    
+    return JsonResponse({'success': False})
 
 def delete_book(request, book_id):
     # Handle deleting the book object

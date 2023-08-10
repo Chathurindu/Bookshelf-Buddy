@@ -30,3 +30,38 @@ venv\Scripts\activate
 source venv/bin/activate
 
 ```
+
+### Installation
+
+```bash
+
+# Install project dependencies from the requirements.txt file:
+pip install -r requirements.txt
+
+```
+
+### Create Superuser
+
+```bash
+
+# To access the Django admin interface, create a superuser account using the following command:
+python manage.py createsuperuser
+
+```
+### Database Migrations
+
+```bash
+
+# Apply database migrations to set up the database schema:
+python manage.py makemigrations
+python manage.py migrate
+
+```
+### Run Development Server
+
+```bash
+
+# Start the development server to run the project:
+python manage.py runserver
+
+```

@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2 class="text-2xl font-semibold mb-4 text-center">Sign In</h2>
-
-  <div class="flex items-center justify-center">
-    <div class="w-full max-w-xs">
+<h2 class="text-2xl font-semibold mb-4 text-center">Sign In</h2>
+<div class="flex items-center justify-center">
+  <div class="w-full max-w-xs">
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post">
       {% csrf_token %}
       <div class="mb-4">
@@ -31,20 +30,17 @@
       </div>
     </form>
   </div>
-  </div>
-
-  <script>
-    // Add class to id_username input field using jQuery
-    $(document).ready(function() {
-      $('#id_username').addClass('shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline');
-    });
-  </script>
-
+</div>
+<script>
+  // Add class to id_username input field using jQuery
+  $(document).ready(function() {
+    $('#id_username').addClass('shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline');
+  });
+</script>
 <script>
   // Add class to id_username input field using jQuery
   $(document).ready(function() {
     $('#id_password').addClass('shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline');
   });
 </script>
-
 {% endblock %}
